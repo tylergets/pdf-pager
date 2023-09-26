@@ -5,47 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26261b09-2323-4ef8-8c19-10af38c62208" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/browser.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/page.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/examples/headerFooter.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/examples/invoice.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/generator.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/options.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yaml.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/all.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/array.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/conditionals.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/deep_object.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/errors.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/faker.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures/array/location.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures/array_relationship/location.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures/blog/blog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures/blog_advanced/blog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures/blog_static/blog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures/conditional/blog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures/dummy.css" beforeDir="false" afterPath="$PROJECT_DIR$/tests/helpers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures/graph_test/blog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fixtures/uuid/location.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/graph_deep.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/helpers.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/input_errors.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/key_and_id.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/order.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/persistent_ids.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/primitives.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/repeat.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/typeorm.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/types.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/variables.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/yaml.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/basic.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/all.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/all.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/footer.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/footer.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/header.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/header.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/invoice.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/examples/invoice.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/examples/invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/tests/examples/invoice.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1678830702780</updated>
       <workItem from="1678830703856" duration="53000" />
-      <workItem from="1695684909829" duration="9532000" />
+      <workItem from="1695684909829" duration="10112000" />
     </task>
     <servers />
   </component>
