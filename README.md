@@ -30,3 +30,6 @@ import {PDFPager} from "pdf-pager";
 const file = await PDFPager.fromTemplate(path.join(__dirname, 'invoice.html'));
 await fs.promises.writeFile('invoice.pdf', file);
 ```
+
+### References
+https://github.com/Hopding/pdf-lib/issues/128

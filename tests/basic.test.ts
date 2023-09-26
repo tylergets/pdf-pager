@@ -1,6 +1,6 @@
 import test from 'ava'
 import {PDFPager} from "../src";
-import {pdfContains} from "./helpers";
+import {pdfContains, testPdf} from "./helpers";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -30,6 +30,10 @@ test('Can generate a Invoice PDF from a HTML file', async t => {
 
     t.truthy(await pdfContains(file, 'Invoice'));
     t.truthy(await pdfContains(file, '$10.00'));
+
+    const doc = await testPdf(file);
+    t.is(await doc.width, 598.08002) // These are not correct
+    t.is(await doc.height, 1235.88) // These are not correct
 
 })
 

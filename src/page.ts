@@ -3,9 +3,8 @@ import * as fs from "fs";
 import { PDFDocument } from 'pdf-lib'
 
 interface PagePDFOptions {
-    elementId?: string;
-    height: number,
-    width: number,
+    height: string,
+    width: string,
 }
 
 export class BrowserPage {
@@ -89,7 +88,7 @@ export class BrowserPage {
         const MARGIN = 0; // Needed to avoid getting two pages
 
         const output = await this.pdf({
-            height: elementHeight.height + MARGIN,
+            height: elementHeight.height + MARGIN + 'px', // Need to consider what the effect of measuring this in pixels is
             width: this.paperWidth,
         })
 
@@ -109,12 +108,10 @@ export class BrowserPage {
         };
     }
 
-    paperWidth = 2480;
+    paperWidth: string = '8.3in';
+    paperHeight: string = "11.7in";
 
     async getAll() {
-
-        let paperHeight = 3508;
-        let paperWidth = this.paperWidth;
 
         const header = await this.extractElement("header");
         const footer = await this.extractElement("footer");
@@ -123,8 +120,8 @@ export class BrowserPage {
         await this.removeElement("footer");
 
         const allPages = await this.pdf({
-            height: paperHeight,
-            width: paperWidth,
+            height: this.paperHeight,
+            width: this.paperWidth,
         });
 
         fs.writeFileSync(__dirname + `/../examples/all.pdf`, allPages);
@@ -178,8 +175,8 @@ export class BrowserPage {
         console.log(`Paper height: ${pdfOptions.height}, paper width: ${pdfOptions.width}`)
 
         return await this.page.pdf({
-            height: pdfOptions.height + "px",
-            width: pdfOptions.width + "px",
+            height: pdfOptions.height,
+            width: pdfOptions.width,
             omitBackground: false,
             margin: {
                 top: 0,
