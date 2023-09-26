@@ -5,13 +5,7 @@ Expansions on puppeteers PDF API to allow for some extra features.
 Currently, being developed to use internally on a project, but will be expanded to be more generic and useful for others. 
 
 ## TODO
-
-* Cleanup interface
-* Cleanup logging
-* Allow passing custom document sizes
-  * Add tests for page size
 * Support page numbers
-* Streaming output
  
 # How it works
 
