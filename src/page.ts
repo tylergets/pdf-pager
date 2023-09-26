@@ -1,6 +1,7 @@
 import {Page} from "puppeteer";
 import {PDFDocument} from 'pdf-lib'
 import * as fs from "fs";
+import * as path from "path";
 
 export class PagePDFOptions {
     height: string = "11in";
@@ -40,9 +41,35 @@ export class BrowserPage {
         await this.page.emulateMediaType('print');
 
         if (data.startsWith("http")) {
-            return this.loadUrl(data);
+            await this.loadUrl(data);
+        } else {
+
+            await this.page.evaluate(() => {
+                (window as any).PagerPDF = {
+                    ping() {
+                        return "pong";
+                    },
+                    currentPage() {
+                        return 1;
+                    },
+                    totalPages() {
+                        return 1;
+                    }
+                };
+            });
+
+            await this.loadString(data);
         }
-        return this.loadString(data);
+
+        // Add our window script
+        const filepath = path.join(__dirname, "..","window.js");
+        console.log(filepath);
+
+        await this.page.addScriptTag({
+            content: fs.readFileSync(filepath, 'utf8')
+        })
+
+        console.log('Injected script');
     }
 
     measureElement(elementId) {

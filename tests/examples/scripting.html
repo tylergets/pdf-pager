@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Header and Footer Example</title>
+
+    <!-- Most demos use UnoCSS, which is similar to TailwindCSS, but you can use any CSS framework you want-->
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css">
+
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+
+        createApp({
+            get hasScript() {
+                return !!window.PagerPDF
+            },
+            scriptPing() {
+                return window.PagerPDF.ping();
+            }
+        }).mount();
+    </script>
+</head>
+<body v-scope>
+    <div>
+        <div v-if="hasScript">
+            Page script exists
+        </div>
+        <div v-else>
+            No script found, is this running inside PagerPDF?
+        </div>
+        <div v-if="hasScript">
+            Script says {{ scriptPing() }}
+        </div>
+    </div>
+</body>
+</html>

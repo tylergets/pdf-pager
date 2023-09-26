@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Header and Footer Example</title>
+
+    <!-- Most demos use UnoCSS, which is similar to TailwindCSS, but you can use any CSS framework you want-->
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css">
+
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+
+        createApp({
+            get currentPage() {
+                return window.PagerPDF ? window.PagerPDF.currentPage() : 0
+            },
+            get totalPages() {
+                return window.PagerPDF ? window.PagerPDF.totalPages() : 0
+            },
+        }).mount();
+    </script>
+</head>
+<body v-scope>
+    <div v-for=" i in 50">
+        <div class="break-after-page">
+            This is page {{currentPage}} of {{totalPages}}
+        </div>
+    </div>
+</body>
+</html>
