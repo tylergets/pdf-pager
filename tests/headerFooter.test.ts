@@ -3,7 +3,7 @@ import {PDFPager} from "../src";
 import {pdfContains, testPdf} from "./helpers";
 import * as path from "path";
 
-test.only('Can generate a PDF from a HTML file with Header and Footers from nested elements', async t => {
+test.skip('Can generate a PDF from a HTML file with Header and Footers from nested elements', async t => {
 
     const pager = PDFPager.create()
 

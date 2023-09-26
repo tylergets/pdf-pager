@@ -148,15 +148,14 @@ export class BrowserPage {
         }
 
         await this.page.evaluate((elementId) => {
-            // Hide all elements on the page
             let style = document.createElement('style');
             style.id = 'hideAllExceptElementId';
+
+            // This one works, but generates a lot of extra pages, maybe we get just the first page
+            // style.innerHTML = `body {  visibility: hidden; } #${elementId} { visibility: visible; position: absolute; left: 0; top: 0; width: 100% }`;
+
             style.innerHTML = `body > *:not(#${elementId}) { display: none !important; }`;
             document.head.appendChild(style);
-
-            // Return the outerHTML of the desired element for further processing (if needed)
-            let element = document.getElementById(elementId);
-            return element ? element.outerHTML : null;
         }, elementId);
 
         const output = await this.pdf({
@@ -172,7 +171,7 @@ export class BrowserPage {
             }
         });
 
-        await fs.promises.writeFile(`${elementId}.pdf`, output);
+        await fs.promises.writeFile(`examples/${elementId}.pdf`, output);
 
         const pdfDocument = await PDFDocument.load(output, {
             updateMetadata: false,
