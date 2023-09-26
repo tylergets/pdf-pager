@@ -71,8 +71,7 @@ class PdfAssertions {
 
     async save(s: string) {
         await fs.promises.writeFile(`examples/${s}.pdf`, this.file);
-        av.log(`${s}.pdf saved to disk`);
-        test.log
+        console.log(`${s}.pdf saved to disk`);
     }
 }
 

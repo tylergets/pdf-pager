@@ -5,19 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26261b09-2323-4ef8-8c19-10af38c62208" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/examples/basic.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/all.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/footer.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/header.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/headerFooter.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/invoice.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/test2.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/browser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/browser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/basic.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/basic.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
