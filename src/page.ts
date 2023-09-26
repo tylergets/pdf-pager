@@ -185,7 +185,13 @@ export class BrowserPage {
     }
 
     private async loadString(data: string) {
-        await this.page.setContent(data);
+        await this.page.setContent(data, {
+            waitUntil: [
+                "load",
+                "networkidle0",
+                "domcontentloaded"
+            ]
+        });
         await this.page.waitForNetworkIdle()
     }
 }
