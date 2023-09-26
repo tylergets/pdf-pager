@@ -171,7 +171,7 @@ export class BrowserPage {
             }
         });
 
-        await fs.promises.writeFile(`examples/${elementId}.pdf`, output);
+        // await fs.promises.writeFile(`examples/${elementId}.pdf`, output);
 
         const pdfDocument = await PDFDocument.load(output, {
             updateMetadata: false,
