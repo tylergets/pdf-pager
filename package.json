@@ -7,6 +7,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "pdf-pager": "./dist/cli.js"
+  },
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -19,9 +22,10 @@
     "test": "ava",
     "coverage": "c8 ava",
     "upgrade": "taze -I",
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean"
+    "build": "tsup src/cli.ts src/index.ts --format cjs,esm --dts --clean"
   },
   "dependencies": {
+    "commander": "^11.0.0",
     "pdf-lib": "^1.17.1",
     "puppeteer": "^21.3.4"
   },

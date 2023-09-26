@@ -1,0 +1,23 @@
+
+> pdf-pager@0.0.11 build
+> tsup src/cli.ts src/index.ts --format cjs,esm --dts --clean -d verbose
+
+CLI Building entry: src/cli.ts, src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v7.2.0
+CLI Target: es2015
+CLI Cleaning output folder
+CJS Build start
+ESM Build start
+ESM verbose/cli.mjs   258.00 B
+ESM verbose/index.mjs 10.19 KB
+ESM ⚡️ Build success in 13ms
+CJS verbose/cli.js   300.00 B
+CJS verbose/index.js 11.75 KB
+CJS ⚡️ Build success in 13ms
+DTS Build start
+DTS ⚡️ Build success in 757ms
+DTS verbose/cli.d.ts    20.00 B
+DTS verbose/index.d.ts  1.57 KB
+DTS verbose/cli.d.mts   20.00 B
+DTS verbose/index.d.mts 1.57 KB
