@@ -33,3 +33,4 @@ await fs.promises.writeFile('invoice.pdf', file);
 
 ### References
 https://github.com/Hopding/pdf-lib/issues/128
+https://github.com/Hopding/pdf-lib/issues/143 -- PaperSizes

@@ -21,6 +21,15 @@ test.skip('Can generate a PDF from a HTML file', async t => {
     t.truthy(await pdfContains(file, 'Penguins'));
 
 })
+test('An A4 Test PDF reports the correct size', async t => {
+
+    const file = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'a4.pdf'))
+
+    const doc = await testPdf(file);
+    t.is(Math.floor(await doc.height), 612)
+    t.is(Math.floor(await doc.width), 858)
+
+})
 
 test('Can generate a Invoice PDF from a HTML file', async t => {
 
@@ -32,8 +41,8 @@ test('Can generate a Invoice PDF from a HTML file', async t => {
     t.truthy(await pdfContains(file, '$10.00'));
 
     const doc = await testPdf(file);
-    t.is(await doc.width, 598.08002) // These are not correct
-    t.is(await doc.height, 1235.88) // These are not correct
+    t.is(Math.round(await doc.width), 598)
+    t.is(Math.round(await doc.height), 843)
 
 })
 

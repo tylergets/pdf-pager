@@ -47,8 +47,8 @@ export class BrowserPage {
             }
             const rect = element.getBoundingClientRect();
             return {
-                width: rect.width,
-                height: rect.height,
+                widthPx: rect.width,
+                heightPx: rect.height,
             };
         }, elementId);
     }
@@ -69,7 +69,7 @@ export class BrowserPage {
             return null;
         }
 
-        console.log(`We have ${elementId}, at height ${elementHeight.height}`);
+        console.log(`We have ${elementId}, with pixel height ${elementHeight.heightPx}`);
 
         await this.page.evaluate((elementId) => {
             // Hide all elements on the page
@@ -88,7 +88,7 @@ export class BrowserPage {
         const MARGIN = 0; // Needed to avoid getting two pages
 
         const output = await this.pdf({
-            height: elementHeight.height + MARGIN + 'px', // Need to consider what the effect of measuring this in pixels is
+            height: elementHeight.heightPx + MARGIN + 'px', // Need to consider what the effect of measuring this in pixels is
             width: this.paperWidth,
         })
 
@@ -102,9 +102,15 @@ export class BrowserPage {
             }
         });
 
+        const pdfDocument = await PDFDocument.load(output, {
+            updateMetadata: false,
+        });
+
         return {
             output,
-            height: elementHeight.height,
+            pdfDocument,
+            heightPts: pdfDocument.getPage(0).getHeight(),
+            heightPx: elementHeight.heightPx,
         };
     }
 
@@ -113,14 +119,20 @@ export class BrowserPage {
 
     async getAll() {
 
+        const PtsPI = 72;
+
         const header = await this.extractElement("header");
         const footer = await this.extractElement("footer");
 
         await this.removeElement("header");
         await this.removeElement("footer");
 
+        const heightPts = (parseFloat(this.paperHeight) * PtsPI) - (header.heightPts + footer.heightPts);
+
+        let pageRenderHeight = heightPts / PtsPI + 'in';
+        console.log(`Rendering all pages with height of ${pageRenderHeight}`)
         const allPages = await this.pdf({
-            height: this.paperHeight,
+            height: pageRenderHeight,
             width: this.paperWidth,
         });
 
@@ -136,22 +148,27 @@ export class BrowserPage {
             const newPage = pdfDoc.addPage();
             const page = pages[i];
 
-            newPage.setSize(page.getWidth(), page.getHeight() + header?.height + footer?.height);
+            // TODO The values below are wrong because they are in pixels
+            let pageHeight = page.getHeight();
+            console.log('Page height: ' + pageHeight);
+            let newHeight = pageHeight + (header?.heightPts) + (footer?.heightPts);
+            console.log('New height: ' + newHeight);
+            newPage.setSize(page.getWidth(), newHeight);
 
             if (header) {
                 const [headerEmbed] = await pdfDoc.embedPdf(header.output)
                 newPage.drawPage(headerEmbed, {
-                    height: header.height,
+                    height: header.heightPts , // TODO This needs to be converted to points
                     width: newPage.getWidth(),
                     x: 0,
-                    y: newPage.getHeight() - header.height,
+                    y: newPage.getHeight() - header.heightPts,  // TODO This needs to be converted to points
                 })
             }
 
             if (footer) {
                 const [footerEmbed] = await pdfDoc.embedPdf(footer.output)
                 newPage.drawPage(footerEmbed, {
-                    height: footer.height,
+                    height: footer.heightPts, // TODO This needs to be converted to points
                     width: newPage.getWidth(),
                     x: 0,
                     y: 0,
@@ -159,11 +176,12 @@ export class BrowserPage {
             }
 
             const embed = await pdfDoc.embedPage(page);
+            console.log(`page ${i} height: ${page.getHeight()}`)
             newPage.drawPage(embed, {
                 height: page.getHeight(),
                 width: newPage.getWidth(),
                 x: 0,
-                y: footer?.height || 0,
+                y: footer?.heightPts || 0, // TODO This needs to be converted to points
             })
         }
 
