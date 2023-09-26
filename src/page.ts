@@ -2,6 +2,7 @@ import {Page} from "puppeteer";
 import {PDFDocument} from 'pdf-lib'
 import * as fs from "fs";
 import * as path from "path";
+import {BrowserHelper} from "./browser";
 
 export class PagePDFOptions {
     height: string = "11in";
@@ -12,8 +13,10 @@ export class BrowserPage {
 
     page: Page;
     private config: PagePDFOptions;
+    private browser: BrowserHelper;
 
-    constructor(page: Page, options?: Partial<PagePDFOptions>) {
+    constructor(browser: BrowserHelper, page: Page, options?: Partial<PagePDFOptions>) {
+        this.browser = browser;
         const defaultOptions = new PagePDFOptions()
         Object.assign(defaultOptions, options);
 
@@ -44,6 +47,11 @@ export class BrowserPage {
             await this.loadUrl(data);
         } else {
 
+            await this.page.exposeFunction('pdfPagerLog', (data) => {
+                console.log(`PDFPager - From page: ${data}`);
+            });
+
+
             await this.page.evaluate(() => {
                 (window as any).PagerPDF = {
                     ping() {
@@ -54,7 +62,10 @@ export class BrowserPage {
                     },
                     totalPages() {
                         return 1;
-                    }
+                    },
+                    log(...args) {
+                        (window as any).pdfPagerLog(args);
+                    },
                 };
             });
 
@@ -145,6 +156,7 @@ export class BrowserPage {
         const output = await pdfDoc.save();
 
         await this.page.close();
+        await this.browser.close(); // TODO Create some caching mechanism
 
         return {
             header: header?.output, footer: footer?.output, combined: output.buffer,
@@ -205,6 +217,11 @@ export class BrowserPage {
             throw new Error(`Height of ${pdfOptions.height} is less than 0`);
         }
 
+        await this.page.evaluate(() => {
+            // TODO Call a beforePrint function, if its declared then we will wait for it to finish.
+            (window as any).PagerPDF?.log('About to print PDF, injecting handler');
+        });
+
         return await this.page.pdf({
             height: pdfOptions.height, width: pdfOptions.width, omitBackground: false, printBackground: true, margin: {
                 top: 0, left: 0, bottom: 0, right: 0
@@ -218,4 +235,5 @@ export class BrowserPage {
         });
         await this.page.waitForNetworkIdle()
     }
+
 }

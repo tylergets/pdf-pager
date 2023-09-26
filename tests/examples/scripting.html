@@ -11,6 +11,8 @@
     <script type="module">
         import { createApp } from 'https://unpkg.com/petite-vue?module'
 
+        window.PagerPDF.log('Hello from the page script');
+
         createApp({
             get hasScript() {
                 return !!window.PagerPDF
