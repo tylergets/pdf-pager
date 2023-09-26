@@ -60,16 +60,6 @@ export class BrowserPage {
 
             await this.loadString(data);
         }
-
-        // Add our window script
-        const filepath = path.join(__dirname, "..","window.js");
-        console.log(filepath);
-
-        await this.page.addScriptTag({
-            content: fs.readFileSync(filepath, 'utf8')
-        })
-
-        console.log('Injected script');
     }
 
     measureElement(elementId) {

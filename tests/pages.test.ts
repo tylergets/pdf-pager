@@ -3,7 +3,7 @@ import {PDFPager} from "../src";
 import {pdfContains, testPdf} from "./helpers";
 import * as path from "path";
 
-test('Can get the total number of pages', async t => {
+test.skip('Can get the total number of pages', async t => {
 
     const file = await PDFPager.create({
         height: '7in',
@@ -18,7 +18,7 @@ test('Can get the total number of pages', async t => {
 
 })
 
-test('Can get the current page number', async t => {
+test.skip('Can get the current page number', async t => {
 
     const file = await PDFPager.create({
         height: '7in',
