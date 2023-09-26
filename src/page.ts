@@ -1,5 +1,6 @@
 import {Page} from "puppeteer";
 import {PDFDocument} from 'pdf-lib'
+import * as fs from "fs";
 
 export class PagePDFOptions {
     height: string = "11in";
@@ -80,6 +81,8 @@ export class BrowserPage {
 
         if (isNaN(heightPts / PtsPI)) {
             throw new Error(`Height of ${this.paperHeight} is not a number, header: ${header?.heightPts}, footer: ${footer?.heightPts}, heightPts: ${heightPts}`);
+        } else if (heightPts < 0) {
+            throw new Error(`Height of ${this.paperHeight} is less than 0, header: ${header?.heightPts}, footer: ${footer?.heightPts}, heightPts: ${heightPts}`);
         }
 
         let pageRenderHeight = heightPts / PtsPI + 'in';
@@ -122,7 +125,13 @@ export class BrowserPage {
             })
         }
 
-        return await pdfDoc.save();
+        const output = await pdfDoc.save();
+
+        await this.page.close();
+
+        return {
+            header: header?.output, footer: footer?.output, combined: output.buffer,
+        };
     }
 
     private async loadUrl(data: string) {
@@ -134,7 +143,7 @@ export class BrowserPage {
     private async extractElement(elementId) {
 
         const elementHeight = await this.measureElement(elementId);
-        if (!elementHeight) {
+        if (!elementHeight || elementHeight.heightPx <= 0) {
             return null;
         }
 
@@ -150,12 +159,8 @@ export class BrowserPage {
             return element ? element.outerHTML : null;
         }, elementId);
 
-        // Capture the element as a PDF
-
-        const MARGIN = 0; // Needed to avoid getting two pages
-
         const output = await this.pdf({
-            height: elementHeight.heightPx + MARGIN + 'px', // Need to consider what the effect of measuring this in pixels is
+            height: elementHeight.heightPx + 'px',
             width: this.paperWidth,
         })
 
@@ -167,6 +172,8 @@ export class BrowserPage {
             }
         });
 
+        await fs.promises.writeFile(`${elementId}.pdf`, output);
+
         const pdfDocument = await PDFDocument.load(output, {
             updateMetadata: false,
         });
@@ -177,20 +184,21 @@ export class BrowserPage {
     }
 
     private async pdf(pdfOptions: PagePDFOptions) {
+
+        if (parseFloat(pdfOptions.height) <= 0) {
+            throw new Error(`Height of ${pdfOptions.height} is less than 0`);
+        }
+
         return await this.page.pdf({
-            height: pdfOptions.height, width: pdfOptions.width, omitBackground: false, margin: {
+            height: pdfOptions.height, width: pdfOptions.width, omitBackground: false, printBackground: true, margin: {
                 top: 0, left: 0, bottom: 0, right: 0
-            }, printBackground: true,
+            },
         });
     }
 
     private async loadString(data: string) {
         await this.page.setContent(data, {
-            waitUntil: [
-                "load",
-                "networkidle0",
-                "domcontentloaded"
-            ]
+            waitUntil: ["load", "networkidle0", "domcontentloaded"]
         });
         await this.page.waitForNetworkIdle()
     }

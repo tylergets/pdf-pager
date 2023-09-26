@@ -49,5 +49,5 @@ The template should contain a #header and #footer element. These will be used to
  * https://weasyprint.org/ -- Not browser based, no JS support
 
 ### References
-https://github.com/Hopding/pdf-lib/issues/128
-https://github.com/Hopding/pdf-lib/issues/143 -- PaperSizes
+ * https://github.com/Hopding/pdf-lib/issues/128
+ * https://github.com/Hopding/pdf-lib/issues/143 -- PaperSizes

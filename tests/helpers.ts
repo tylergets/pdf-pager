@@ -1,13 +1,8 @@
-import * as assert from "assert";
-
 const PDFExtract = require('pdf.js-extract').PDFExtract;
 import { PDFDocument } from 'pdf-lib'
 import * as fs from "fs";
-import test from "ava";
 
-// Could probably be rewritten, first pass at it.
-
-export async function pdfContains(pdf: Buffer | Uint8Array, text: string) {
+export async function pdfContains(pdf: ArrayBufferLike, text: string) {
     const pdfExtract = new PDFExtract();
 
     const options = {};
@@ -33,9 +28,9 @@ export async function pdfContains(pdf: Buffer | Uint8Array, text: string) {
 }
 
 class PdfAssertions {
-    file: Buffer | Uint8Array;
+    file: ArrayBufferLike;
 
-    constructor(file: Buffer | Uint8Array) {
+    constructor(file: ArrayBufferLike) {
         this.file = file;
     }
 
@@ -70,11 +65,11 @@ class PdfAssertions {
     }
 
     async save(s: string) {
-        await fs.promises.writeFile(`examples/${s}.pdf`, this.file);
+        await fs.promises.writeFile(`examples/${s}.pdf`, Buffer.from(this.file));
         console.log(`${s}.pdf saved to disk`);
     }
 }
 
-export async function testPdf(pdf: Buffer | Uint8Array) {
+export async function testPdf(pdf: ArrayBufferLike) {
     return new PdfAssertions(pdf);
 }

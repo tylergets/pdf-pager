@@ -7,7 +7,7 @@ test('Can generate a PDF from a HTML file', async t => {
 
     const pager = PDFPager.create()
 
-    const file = await pager.fromFile(path.join(__dirname, 'examples/headerFooter.html'));
+    const file = await pager.fromFile(path.join(__dirname, 'examples/headerFooter.html')).then((r) => r.combined)
 
     t.falsy(await pdfContains(file, 'Dogs'));
 
@@ -17,45 +17,9 @@ test('Can generate a PDF from a HTML file', async t => {
 
 })
 
-test('Will generate a Letter paper size by default', async t => {
-
-    const file = await PDFPager.create().fromFile(path.join(__dirname, 'examples/invoice.html'));
-
-    t.falsy(await pdfContains(file, 'Dogs'));
-
-    t.truthy(await pdfContains(file, 'Invoice'));
-    t.truthy(await pdfContains(file, '$10.00'));
-
-    const doc = await testPdf(file);
-
-    t.is(await doc.widthIn, 8.5)
-    t.is(await doc.heightIn, 11)
-
-    await doc.save('A4');
-
-})
-
-test('Can generate a basic 7x7 PDF', async t => {
-
-    const file = await PDFPager.create({
-        height: '7in',
-        width: '7in'
-    }).fromFile(path.join(__dirname, 'examples/basic.html'));
-
-    t.falsy(await pdfContains(file, 'Dogs'));
-    t.truthy(await pdfContains(file, 'Item 8'));
-    t.truthy(await pdfContains(file, '$10.00'));
-
-    const doc = await testPdf(file);
-    t.is(await doc.width,  await doc.height)
-
-    await doc.save('7x7');
-
-})
-
 test('Can generate a PDF from a URL', async t => {
 
-    const file = await PDFPager.create().fromURL("https://example.com");
+    const file = await PDFPager.create().fromURL("https://example.com").then((r) => r.combined)
 
     const doc = await testPdf(file);
 

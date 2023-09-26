@@ -7,6 +7,16 @@ class PDFPagerOptions {
     browser = new BrowserHelper();
 }
 
+class PDFPagerResult {
+    header?: ArrayBufferLike;
+    footer?: ArrayBufferLike;
+    combined: ArrayBufferLike;
+
+    constructor(options: Partial<PDFPagerResult>) {
+        Object.assign(this, options);
+    }
+}
+
 export class PDFPager {
 
 
@@ -36,7 +46,7 @@ export class PDFPager {
         return this.load(url);
     }
 
-    private async load(data) {
+    private async load(data) : Promise<PDFPagerResult> {
         const page = await this.config.browser.getPage({
             height: this.config.height,
             width: this.config.width,
@@ -44,6 +54,10 @@ export class PDFPager {
 
         await page.load(data);
 
-        return page.getAll();
+        const output = await page.getAll();
+
+        return new PDFPagerResult({
+            ...output,
+        });
     }
 }
