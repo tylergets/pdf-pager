@@ -28,6 +28,10 @@ export class PDFPager {
         return this.load(htmlContent);
     }
 
+    async fromString(htmlContent: string) {
+        return this.load(htmlContent);
+    }
+
     async fromURL(url: string) {
         return this.load(url);
     }
