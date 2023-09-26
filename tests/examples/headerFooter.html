@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Header and Footer Example</title>
+
+    <!-- Most demos use UnoCSS, which is similar to TailwindCSS, but you can use any CSS framework you want-->
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css">
+
+</head>
+<body>
+    <div id="header">
+        <div>
+            <h1 class="text-5xl p-4">My Big Header</h1>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="text-5xl p-4">
+            Im a bit footer, on every page too
+        </div>
+    </div>
+
+    <div>
+        <div class="break-after-page bg-red-500 p-4">
+            Cats
+        </div>
+        <div class="break-after-page">
+            <div class="flex flex-col gap-4">
+                <div class="h-[900px] bg-purple-500 mb-2 p-2 print:break-inside-avoid text-5xl">Multiple Pages</div>
+                <div class="h-[900px] bg-purple-500 mb-2 p-2 print:break-inside-avoid text-5xl">Multiple Pages</div>
+                <div class="h-[900px] bg-purple-500 mb-2 p-2 print:break-inside-avoid text-5xl">Multiple Pages</div>
+                <div class="h-[900px] bg-purple-500 mb-2 p-2 print:break-inside-avoid text-5xl">Multiple Pages</div>
+                <div class="h-[900px] bg-purple-500 mb-2 p-2 print:break-inside-avoid text-5xl">Multiple Pages</div>
+            </div>
+        </div>
+        <div class="break-after-page bg-blue-500 p-4">
+            Penguins
+        </div>
+    </div>
+</body>
+</html>

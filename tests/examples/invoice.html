@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Header and Footer Example</title>
+
+    <!-- Most demos use UnoCSS, which is similar to TailwindCSS, but you can use any CSS framework you want-->
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css">
+
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+        createApp().mount()
+    </script>
+</head>
+<body v-scope>
+    <div id="header" class="border-b">
+        <div class="bg-black text-white py-4 px-10">
+            <div class="flex gap-4 justify-between items-center">
+                <div class="text-sm">Invoice #1</div>
+                <div class="text-sm">My Ecommerce Shop</div>
+                <div class="text-sm">Todays Date</div>
+            </div>
+        </div>
+
+        <div class="px-10 py-24">
+            <div class="grid grid-cols-3">
+                <div class="flex items-center justify-center">
+                    <span class="text-2xl">AwesomeCo</span>
+                </div>
+                <div class="flex items-center justify-center">
+                    <div>
+                        Call us today!
+                    </div>
+                </div>
+                <div class="flex items-center justify-center">
+                    <div class="flex flex-col">
+                        <div>Jason</div>
+                        <div>1234 Awesome St</div>
+                        <div>Cincinnati OH, 45209</div>
+                        <div>440-555-5555</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="bg-black text-white py-4 px-10">
+            <div class="flex gap-4 justify-between items-center">
+                <div class="text-sm text-gray-500">Generated Today</div>
+                <div class="text-sm text-gray-500"></div>
+                <div class="text-sm text-gray-500">Awesome Invoice Software</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-10 pt-4">
+        <table class="table-auto text-xl w-full">
+            <thead>
+                <tr>
+                    <td>Item</td>
+                    <td>Quantity</td>
+                    <td>Price</td>
+                </tr>
+            </thead>
+            <tbody>
+                <template v-for="i in 500">
+                    <tr><td>Item 1</td><td>1</td><td>$10.00</td></tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+    </div>
+</body>
+</html>

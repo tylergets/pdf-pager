@@ -1,0 +1,44 @@
+{
+  "name": "pdf-pager",
+  "version": "0.0.1",
+  "author": "Tyler Getsay",
+  "license": "MIT",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "repository": "https://github.com/tylergets/pdf-pager",
+  "scripts": {
+    "test": "ava",
+    "coverage": "c8 ava",
+    "upgrade": "taze -I",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean"
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^21.3.4"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "devDependencies": {
+    "ava": "^5.3.1",
+    "c8": "^8.0.1",
+    "pdf.js-extract": "^0.2.1",
+    "ts-node": "^10.9.1",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  }
+}
