@@ -1,39 +1,45 @@
 import {BrowserHelper} from "./browser";
 import * as fs from "fs";
-import path from "path";
+
+class PDFPagerOptions {
+    height: string = "11in";
+    width: string = "8.5in";
+    browser = new BrowserHelper();
+}
 
 export class PDFPager {
 
-    browser = new BrowserHelper();
 
-    static async fromFile(filePath: string) {
-        const browser = new BrowserHelper();
-
-        const page = await browser.getPage();
-        let htmlContent = await fs.promises.readFile(filePath).then((buffer) => buffer.toString());
-
-        await page.load(htmlContent);
-
-        const pdf = await page.getAll();
-
-        console.log('Finished...');
-
-        const fileName = path.basename(filePath);
-        fs.writeFileSync(`examples/${fileName.split(".")[0]}.pdf`, pdf);
-
-        return pdf
+    constructor(defaultConfig: PDFPagerOptions) {
+        this.config = defaultConfig;
     }
 
-    static async fromURL(url: string) {
-        const browser = new BrowserHelper();
+    private config: PDFPagerOptions;
 
-        const page = await browser.getPage();
-        await page.load(url);
 
-        const pdf = await page.getAll();
+    static create(options?: Partial<PDFPagerOptions>): PDFPager {
+        const defaultConfig = new PDFPagerOptions();
+        Object.assign(defaultConfig, options);
+        return new PDFPager(defaultConfig);
+    }
 
-        console.log('Finished...');
+    async fromFile(filePath: string) {
+        let htmlContent = await fs.promises.readFile(filePath).then((buffer) => buffer.toString());
+        return this.load(htmlContent);
+    }
 
-        return pdf;
+    async fromURL(url: string) {
+        return this.load(url);
+    }
+
+    private async load(data) {
+        const page = await this.config.browser.getPage({
+            height: this.config.height,
+            width: this.config.width,
+        });
+
+        await page.load(data);
+
+        return page.getAll();
     }
 }

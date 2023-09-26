@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Header and Footer Example</title>
+
+    <!-- Most demos use UnoCSS, which is similar to TailwindCSS, but you can use any CSS framework you want-->
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css">
+
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/petite-vue?module'
+        createApp().mount()
+    </script>
+</head>
+<body v-scope>
+    <div >
+        <table class="table-auto text-xl w-full">
+            <thead class="bg-gray-500">
+                <tr class="font-bold">
+                    <td class="px-4">Item</td>
+                    <td class="px-4">Quantity</td>
+                    <td class="px-4">Price</td>
+                </tr>
+            </thead>
+            <tbody>
+                <template v-for="i in 10">
+                    <tr><td class="px-4">Item {{i}}</td><td>1</td><td>$10.00</td></tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+    </div>
+</body>
+</html>

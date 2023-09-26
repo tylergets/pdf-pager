@@ -1,15 +1,14 @@
 import puppeteer from "puppeteer";
-import {BrowserPage} from "./page";
+import {BrowserPage, PagePDFOptions} from "./page";
 
 export class BrowserHelper {
 
     browser;
 
-    async getPage() {
+    async getPage(options?: Partial<PagePDFOptions>) {
         const page = await this.getBrowser().then(b => b.newPage());
 
-
-        return new BrowserPage(page);
+        return new BrowserPage(page, options);
     }
 
     async getBrowser() {

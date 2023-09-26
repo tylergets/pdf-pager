@@ -2,6 +2,8 @@ import * as assert from "assert";
 
 const PDFExtract = require('pdf.js-extract').PDFExtract;
 import { PDFDocument } from 'pdf-lib'
+import * as fs from "fs";
+import test from "ava";
 
 // Could probably be rewritten, first pass at it.
 
@@ -21,7 +23,6 @@ export async function pdfContains(pdf: Buffer | Uint8Array, text: string) {
             const elementText = content.str;
             if (elementText) {
                 if (elementText.toLowerCase().includes(text.toLowerCase())) {
-                    console.log(`Matches: ${elementText}`)
                     return true
                 }
             }
@@ -44,6 +45,10 @@ class PdfAssertions {
         });
     }
 
+    contains(text) {
+        return pdfContains(this.file, text);
+    }
+
     get height() {
         return this.document.then((doc) => doc.getPage(0).getHeight());
     }
@@ -53,10 +58,21 @@ class PdfAssertions {
     }
 
     get heightIn() {
-        return this.document.then((doc) => doc.getPage(0).getHeight() * 72);
+        return this.document.then((doc) => doc.getPage(0).getHeight() / 72).then((n) => {
+            return Math.round(n * 100) / 100;
+        })
     }
-    get widthIn() {
-        return this.document.then((doc) => doc.getPage(0).getWidth() * 72);
+
+    get widthIn(): Promise<number> {
+        return this.document.then((doc) => doc.getPage(0).getWidth() / 72).then((n) => {
+            return Math.round(n * 100) / 100;
+        })
+    }
+
+    async save(s: string) {
+        await fs.promises.writeFile(`examples/${s}.pdf`, this.file);
+        av.log(`${s}.pdf saved to disk`);
+        test.log
     }
 }
 
