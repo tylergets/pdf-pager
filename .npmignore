@@ -133,3 +133,6 @@ src/
 tests/
 .idea/
 .github/
+
+# examples
+examples/
