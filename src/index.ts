@@ -6,11 +6,11 @@ export class PDFPager {
 
     browser = new BrowserHelper();
 
-    static async fromTemplate(html: string) {
+    static async fromFile(filePath: string) {
         const browser = new BrowserHelper();
 
         const page = await browser.getPage();
-        let htmlContent = await fs.promises.readFile(html).then((buffer) => buffer.toString());
+        let htmlContent = await fs.promises.readFile(filePath).then((buffer) => buffer.toString());
 
         await page.load(htmlContent);
 
@@ -18,7 +18,7 @@ export class PDFPager {
 
         console.log('Finished...');
 
-        const fileName = path.basename(html);
+        const fileName = path.basename(filePath);
         fs.writeFileSync(`examples/${fileName.split(".")[0]}.pdf`, pdf);
 
         return pdf

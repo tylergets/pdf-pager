@@ -12,7 +12,7 @@ test('Can pass any test', async t => {
 
 test.skip('Can generate a PDF from a HTML file', async t => {
 
-    const file = await PDFPager.fromTemplate(path.join(__dirname, 'examples/headerFooter.html'));
+    const file = await PDFPager.fromFile(path.join(__dirname, 'examples/headerFooter.html'));
 
     t.falsy(await pdfContains(file, 'Dogs'));
 
@@ -33,7 +33,7 @@ test('An A4 Test PDF reports the correct size', async t => {
 
 test('Can generate a Invoice PDF from a HTML file', async t => {
 
-    const file = await PDFPager.fromTemplate(path.join(__dirname, 'examples/invoice.html'));
+    const file = await PDFPager.fromFile(path.join(__dirname, 'examples/invoice.html'));
 
     t.falsy(await pdfContains(file, 'Dogs'));
 
