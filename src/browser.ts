@@ -15,6 +15,7 @@ export class BrowserHelper {
         if (!this.browser) {
             this.browser = await puppeteer.launch({
                 headless: !process.env.DEBUG,
+                args: ['--no-sandbox', '--disable-setuid-sandbox'],
             })
         }
 
