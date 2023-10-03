@@ -61,3 +61,5 @@ export class PDFPager {
         });
     }
 }
+
+export {BrowserHelper};
