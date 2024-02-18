@@ -22,7 +22,7 @@ export class BrowserHelper {
         if (!BrowserHelper.browser) {
             console.log(`Launching browser`);
             BrowserHelper.browser = await puppeteer.launch({
-                headless: "new",
+                headless: true,
                 args: ['--no-sandbox', '--disable-setuid-sandbox'],
             })
         }
