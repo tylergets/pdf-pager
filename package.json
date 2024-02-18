@@ -1,6 +1,6 @@
 {
   "name": "pdf-pager",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "author": "Tyler Getsay",
   "license": "MIT",
   "description": "",
@@ -27,7 +27,7 @@
   "dependencies": {
     "commander": "^11.0.0",
     "pdf-lib": "^1.17.1",
-    "puppeteer": "^21.3.4"
+    "puppeteer": "^22.2.0"
   },
   "ava": {
     "files": [
